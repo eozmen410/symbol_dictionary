@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- JQuery -->
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<!-- bootstrap  -->
+	<!-- <link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<style type="text/css">
+		#header {
+			background-color: #7a9e9f;
+			padding: 35px;
+			font-size: 30px;
+			font-weight: bold;
+			text-align: center;
+			color: white;
+		}
+		#nav {
+			overflow: hidden;
+			background-color: black;
+			padding-left: 35px;
+		}
+		#images {
+			margin-right: auto;
+			margin-left: auto;
+		}
+		#symbolCount {
+			display: inline-block;
+			position: sticky;
+			top: 0;
+			padding: 25px;
+			font-size:20px;
+			text-align: center;
+			color: white;
+			font-weight: bold;
+		}
+		#conceptName {
+			display: inline-block;
+			padding: 25px;
+			font-weight: bold;
+			font-size: 24px;
+			text-align: center;
+		}
+		.stick {
+			position: sticky;
+			top: 0;	
+			background-color: #577399;	
+			margin-right: -15px;
+			margin-left: -15px;	
+			color: white;
+			z-index: 99;
+		}
+		.menubar {
+			margin-left: -15px;
+			margin-right: -15px;
+			font-size: 24px;
+			font-weight: bold;
+		}
+		.subitem {
+			font-size: 18px;
+		}
+		#all {
+			font-size: 18px;
+		}
+		#verbs {
+			font-size: 18px;
+		}
+		#nouns {
+			font-size: 18px;
+		}
+		#adjectives {
+			font-size: 18px;
+		}
+		.homeBtn {
+			font-weight: bold;
+			font-size: 16px;
+			padding: 15px;
+			width: 40%;
+			margin: 10px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.col-header {
+			font-size: 18px;
+			font-weight: bold;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.invisible {
+			display: none;
+
+		}
+		.goHome {
+			cursor: pointer;
+		}
+		.search-form {
+			width: 250px;
+		}
+		/* #search_btns {
+
+		} */
+	</style>
+	<script type="text/javascript" src="./all_data.js"></script>
+	<script type="text/javascript" src="./dict.js">	</script>
+
+</head>
+<body>
+	<div class="container-fluid"> 
+		<div id="menu" > 
+		<div class="row"> 
+			<div class="col-md-12" id="header"> Symbol Dictionary </div>
+		</div>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark menubar" id="bar">
+		  <div class="collapse navbar-collapse menu" id="navbarSupportedContent" id="menu">
+		    <ul class="navbar-nav mr-auto">
+					<li class="nav-item active goHome" ><a class="nav-link" id="home">Home</a></li>
+		     <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="verbDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Verbs
+		        </a>
+		        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown" id="verbs">
+		        </div>
+		      </li>
+
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="nounDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Nouns
+		        </a>
+		        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown" id="nouns">
+		        </div>
+		      </li>
+
+   		     <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="adjDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Adjectives
+		        </a>
+		        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown" id="adjectives">
+		        </div>
+		      </li>
+
+   		     <!-- <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="allDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          All
+		        </a>
+		        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown" id="all">
+		        </div>
+		      </li>
+ -->
+		    </ul>
+		    <!-- <form class="form-inline my-2 my-lg-0"> -->
+		      <input class="form-control mr-sm-2 search-form"  placeholder="Search" aria-label="Search" id="search_in">
+		      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id= "search_btn">Search</button>
+		    <!-- </form> -->
+		  </div>
+		</nav>
+		</div>
+		<div class="stick" id="message">
+			<div id="conceptName" class="col-md-5"> </div>
+			<div id="symbolCount" class="col-md-5"></div>
+		</div>
+		
+		<br>
+		<div id="btns" class="row">
+			<div id="verb_btns" class="col-md-4"><div align="center" class="col-header">Verbs</div><br></div>
+			<div id="noun_btns"class="col-md-4"><div align="center" class="col-header">Nouns</div><br></div>
+			<div id="adjective_btns"class="col-md-4"><div align="center"class="col-header">Adjectives</div><br></div>
+		</div>
+		<div  class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6" id="search_btns"></div>
+			<div class="col-md-3"></div>
+		</div>
+		 <div align="center" id="images">
+        	<table id='img_grid' width="300" border="0" cellpadding="50" border-spacing="50"> </table>
+    	</div>
+	</div>
+
+</body>
+</html>
