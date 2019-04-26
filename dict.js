@@ -4,6 +4,7 @@ var nounCount = 0;
 var adjCount = 0;
 var allCount = 0;
 var concepts = [];
+var events = ['winter', 'summer', 'spring', 'fall','christmas', 'new years', 'halloween', 'easter','4th of july','valentines day','hanukkah', 'chinese new years','super bowl', 'day of the dead','st patricks day', 'ramadan','mother\'s day', 'father\'s day','thanksgiving','cinco de mayo']
 $(document).ready(function() {
     console.log("document ready, all_data:");
     console.log(all_data);
@@ -17,6 +18,7 @@ $(document).ready(function() {
     $("#home").click(function(){
         console.log('clicked on home')
         $("#btns").removeClass('invisible')
+        $("#search_btns").empty()
         // loadHome()
         active_type="none"
         loadImages("img_grid", active_type);
@@ -97,6 +99,9 @@ function loadHome() {
         var btndiv = $("<div class='row'>")
         $(btndiv).append(btn)
         var pos = '#'+ pos + '_btns';
+        if (events.includes(name.toLowerCase())){
+            pos = "#events_btns"
+        }
         $(pos).append(btndiv);
     })
 }
