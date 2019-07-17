@@ -9,13 +9,15 @@ $(document).ready(function() {
     console.log("document ready, all_data:");
     console.log(all_data);
     console.log(concepts)
-    loadHome()
+    loadHome(Object.keys(all_data))
     loadNavBar();
     console.log(concepts)
     // $("#bar").css('display', 'none')
+    load_concepts_array()
     loadImages("img_grid", active_type);
 
-    $("#home").click(function(){
+    $("#header").click(function(){
+        $("#message").hide()
         console.log('clicked on home')
         $("#btns").removeClass('invisible')
         $("#search_btns").empty()
@@ -30,6 +32,13 @@ $(document).ready(function() {
         console.log(input)
         search(input)
     })
+
+    $("#search_in").keyup(function(){
+
+         var input =$("#search_in").val() 
+        console.log(input)
+        search(input)
+    })
 });
 
 
@@ -40,11 +49,14 @@ function search(word) {
         var name = concepts[i]['concept']
         if(name.includes(word)){
             console.log(name)
-            matching.push(concepts[i])
+            // matching.push(concepts[i])
+            matching.push(concepts[i]['id'])
         }
     }
+
     console.log(matching)
-    load_search_results(matching)
+    // load_search_results(matching)
+    loadHome(matching)
 
 }
 
@@ -62,7 +74,7 @@ function load_search_results(arr) {
         var name = arr[i]['concept'];
         var pos = all_data[id]['partOfSpeech'];
         var link = id + '_' + name;
-        var btn = $("<button class='btn btn-secondary homeBtn'>"+ capitalFirstLetter(name) +" ("+pos+")"+ "</button>")
+        var btn = $("<button class='btn homeBtn'>"+ capitalFirstLetter(name) +" ("+pos+")"+ "</button>")
         $(btn).attr('id', id)
         $(btn).attr('href', '#'+link)
         $(btn).click(function(){
@@ -76,19 +88,34 @@ function load_search_results(arr) {
     }
 }
 
-function loadHome() {
-    $("verb_btns").empty()
-    $("noun_btns").empty()
-    $("adjective_btns").empty()
-    // $("btns").empty()
-    Object.keys(all_data).forEach(function(key, index) {
-        var id = key;
+function load_concepts_array() {
+    for (var key in all_data) {
         var name = all_data[key]['concept_name'];
-        concepts.push({'concept': name, 'id':id})
+        concepts.push({'concept': name, 'id':key})
+    }
+}
+
+function loadHome(arr) {
+    console.log(arr)
+    $("#verb_btns").empty()
+    $("#verb_btns").append('<div align="center" class="col-header">Verbs</div><br>')
+    $("#noun_btns").empty()
+    $("#noun_btns").append('<div align="center" class="col-header">Nouns</div><br>')
+    $("#adjective_btns").empty()
+    $("#adjective_btns").append('<div align="center" class="col-header">Adjectives</div><br>')
+    $("#events_btns").empty()
+    $("#events_btns").append('<div align="center" class="col-header">Events</div><br>')
+    
+
+    // $("#btns").empty()
+    for (var i in arr) {
+        var id = arr[i];
+        var key = arr[i]
+        var name = all_data[key]['concept_name'];
         // console.log(name)
         var pos = all_data[key]['partOfSpeech'];
         var link = id + '_' + name;
-        var btn = $("<button class='btn btn-secondary homeBtn'>"+ capitalFirstLetter(name) +" ("+pos+")"+ "</button>")
+        var btn = $("<button class='btn homeBtn'>"+ capitalFirstLetter(name) + "</button>")
         $(btn).attr('id', id)
         $(btn).attr('href', '#'+link)
         $(btn).click(function(){
@@ -103,8 +130,9 @@ function loadHome() {
             pos = "#events_btns"
         }
         $(pos).append(btndiv);
-    })
+    }
 }
+
 
 function loadNavBar() {
     console.log("loading navbar...");
@@ -163,6 +191,7 @@ function loadImages(table_id, id) {
     console.log('creating image grid...')
     console.log(id)
     if (id !== "none") {
+        $("#message").show()
         var symbol_list = all_data[id]["symbols"]
         var count = 0;
         var concept = all_data[id]["concept_name"]
@@ -179,7 +208,9 @@ function loadImages(table_id, id) {
             url = symbol_list[i]["imageURL"]
             search_term = "search term: " + symbol_list[i]['term']
             cell = row.insertCell(-1);
-            html = '<div class=\"parent\"> <img style=\'width: 350px; border: 2px solid white; padding: 3px; margin: 2px;\' src=\"' + url + '\"/> <div  class=\"info\">' + search_term + '</div>';
+            html = '<div class=\"parent\"> <img src=\"' + url + '\"/> <div  class=\"info\">' + search_term + '</div>';
+            // html = '<div class=\"parent\"> <img style=\'width: 350px; border: 2px solid white; padding: 3px; margin: 2px;\' src=\"' + url + '\"/> <div  class=\"info\">' + search_term + '</div>';
+
             cell.innerHTML = html;
                             count++;
                         }
@@ -190,9 +221,10 @@ function loadImages(table_id, id) {
             }
         }
         $("#symbolCount").html("# of symbols: " + count);
-        $("#conceptName").html("Concept: " + concept);
+        $("#conceptName").html(concept);
     } else {
         $('#' + table_id + ' tr').remove();
+        $("#message").hide()
         $("#symbolCount").html("");
         $("#conceptName").html("Pick a concept to start!");
     }
