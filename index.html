@@ -51,8 +51,17 @@
 			padding: 25px;
 			font-size:20px;
 			text-align: center;
-			color: white;
-			font-weight: bold;
+			font-style:italic;
+			color: #777;
+			/*font-weight: bold;*/
+		}
+		#symbolType {
+			background-color: #FFFFFF;
+		 	padding: 0px;
+		  	padding-top:0px;
+		  	font-size: 20px;
+		  	color: #777;
+		  	padding-bottom: 17px;
 		}
 		#conceptName {
 			display: inline-block;
@@ -62,13 +71,13 @@
 			text-align: center;
 		}
 		.stick {
-			position: sticky;
+			/*position: sticky;
 			top: 0;	
 			background-color: #577399;	
 			margin-right: -15px;
 			margin-left: -15px;	
 			color: white;
-			z-index: 99;
+			z-index: 99;*/
 		}
 		.menubar {
 			margin-left: -15px;
@@ -162,7 +171,26 @@
 		}
 		#bar{
 			/*padding-left:-30px!important;*/
-		}		
+		}	
+		#conceptName {
+		  background-color: #FFFFFF;
+		  text-align: center;
+		  padding-top: 10px;
+		  padding-left:10px;
+		  padding-bottom:0px;
+		  margin-bottom:0px;
+		  font-size: 49px;
+		  font-weight: bold;
+		  
+		  color: black;
+
+		  margin-left:auto;
+		  margin-right:5px;
+
+		  text-transform: lowercase;
+		  width:100%;
+
+		  }	
 
 	</style>
 	<script type="text/javascript" src="./all_data.js"></script>
@@ -228,15 +256,17 @@
 		
 		<!-- <div class = 'col-xs-3'> -->
 		
-		<!-- <div class="stick" id="message">
-			<div class='row' >
-			<div id="conceptName" class="col-md-5"> </div>
-			<div id="symbolCount" class="col-md-5"></div>
-		</div>
-		</div> -->
+
 		
 		<br>
 		<div id="btns" class="row">
+			<div class="stick" id="message">
+			<div class='row' >
+			<div style="display: inline-block; vertical-align: bottom;" id="conceptName" > </div>
+			<div style="display: inline-block; vertical-align: bottom;" id="symbolType" > </div>
+			<div style="display: inline-block; vertical-align: bottom;" id="symbolCount" ></div>
+		</div>
+		</div>
 			<div id="verb_btns" class="col-md-3"><div align="center" class="col-header">Verbs</div><br></div>
 			<div id="noun_btns"class="col-md-3"><div align="center" class="col-header">Nouns</div><br></div>
 			<div id="adjective_btns"class="col-md-3"><div align="center"class="col-header">Adjectives</div><br></div>

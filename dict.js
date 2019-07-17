@@ -19,7 +19,7 @@ $(document).ready(function() {
     $("#header").click(function(){
         $("#message").hide()
         console.log('clicked on home')
-        $("#btns").removeClass('invisible')
+        // $("#btns").removeClass('invisible')
         $("#search_btns").empty()
         // loadHome()
         active_type="none"
@@ -64,7 +64,8 @@ function load_search_results(arr) {
     // $("verb_btns").empty()
     // $("noun_btns").empty()
     // $("adjective_btns").empty()
-    $("#btns").addClass('invisible')
+    // $("#btns").addClass('invisible')
+    empty_concepts()
     $("#search_btns").empty()
     $("#search_btns").removeClass('invsible')
     // $("#search_btns").removeClass('invsible')
@@ -95,6 +96,17 @@ function load_concepts_array() {
     }
 }
 
+function empty_concepts() {
+    $("#verb_btns").empty()
+    // $("#verb_btns").append('<div align="center" class="col-header">Verbs</div><br>')
+    $("#noun_btns").empty()
+    // $("#noun_btns").append('<div align="center" class="col-header">Nouns</div><br>')
+    $("#adjective_btns").empty()
+    // $("#adjective_btns").append('<div align="center" class="col-header">Adjectives</div><br>')
+    $("#events_btns").empty()
+    // $("#events_btns").append('<div align="center" class="col-header">Events</div><br>')
+}
+
 function loadHome(arr) {
     console.log(arr)
     $("#verb_btns").empty()
@@ -120,8 +132,10 @@ function loadHome(arr) {
         $(btn).attr('href', '#'+link)
         $(btn).click(function(){
             setActive(this.id)
-            $("#btns").addClass('invisible')
+            // $("#btns").empty()
+            // $("#btns").addClass('invisible')
             // $("#bar").css('display', 'block')
+            empty_concepts()
         })
         var btndiv = $("<div class='row'>")
         $(btndiv).append(btn)
@@ -156,8 +170,9 @@ function addConcept(id, name, partOfSpeech) {
     $(conceptOption).attr('id',  id);
     $(conceptOption).click(function() {
         console.log(this.id);
-        $("#btns").addClass('invisible')
-        $("#search_btns").empty()
+        // $("#btns").addClass('invisible')
+        // $("#search_btns").empty()
+        empty_concepts()
         setActive(this.id)
     })
     var pos = '#'+ partOfSpeech + 's';
@@ -206,9 +221,10 @@ function loadImages(table_id, id) {
                         console.log(symbol_list.length)
                         if(symbol_list[i]["deleted"].valueOf() === "False" ){
             url = symbol_list[i]["imageURL"]
-            search_term = "search term: " + symbol_list[i]['term']
+            search_term = symbol_list[i]['term']
             cell = row.insertCell(-1);
             html = '<div class=\"parent\"> <img src=\"' + url + '\"/> <div  class=\"info\">' + search_term + '</div>';
+
             // html = '<div class=\"parent\"> <img style=\'width: 350px; border: 2px solid white; padding: 3px; margin: 2px;\' src=\"' + url + '\"/> <div  class=\"info\">' + search_term + '</div>';
 
             cell.innerHTML = html;
@@ -220,6 +236,7 @@ function loadImages(table_id, id) {
                 row = table.insertRow(row_num);
             }
         }
+        $("#symbolType").html(" [" + all_data[id]['partOfSpeech'] + "]")
         $("#symbolCount").html("# of symbols: " + count);
         $("#conceptName").html(concept);
     } else {
