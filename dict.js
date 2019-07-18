@@ -24,6 +24,8 @@ $(document).ready(function() {
 		// $('#myTab a[href="' + hash + '"]').tab('show');
     if (hash.length > 1) {
         console.log(hash)
+        $("#search_in").css('visibility', 'hidden')
+        $("#search_btn").css('visibility', 'hidden')
         var w_id = hash.split('_')[0]
         w_id = w_id.substr(1)
         console.log(w_id)
@@ -150,7 +152,7 @@ function loadHome(arr) {
         $(btn).attr('id', id)
         $(btn).data('name', name)
         $(btn).attr('href', '#'+link)
-        $(btn).dblclick(function(){
+        $(btn).click(function(){
              $("#search_in").css('visibility', 'hidden')
              $("#search_btn").css('visibility', 'hidden')
             setActive(this.id)
