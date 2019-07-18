@@ -4,7 +4,7 @@ var nounCount = 0;
 var adjCount = 0;
 var allCount = 0;
 var concepts = [];
-var total = 0;
+
 var events = ['winter', 'summer', 'spring', 'fall','christmas', 'new years', 'halloween', 'easter','4th of july','valentines day','hanukkah', 'chinese new years','super bowl', 'day of the dead','st patricks day', 'ramadan','mother\'s day', 'father\'s day','thanksgiving','cinco de mayo']
 $(document).ready(function() {
     console.log("document ready, all_data:");
@@ -30,15 +30,15 @@ $(document).ready(function() {
     // display_symbols(active_type)
 
     $("#header").click(function(){
-        $("#message").hide()
         console.log('clicked on home')
         // $("#btns").removeClass('invisible')
         $("#btns").hide()
         $("#search_btns").empty()
-        // loadHome()
+        loadHome(Object.keys(all_data))
         active_type="none"
+        window.location.href = '#'
         // loadImages("img_grid", active_type);
-        display_symbols(active_type)
+        // display_symbols(active_type)
     })
 
     $("#search_btn").click(function(){
@@ -60,7 +60,7 @@ $(document).ready(function() {
 
 
 function search(word) {
-    
+    window.location.href = '#'
     var matching = []
     for (var i=0; i<concepts.length;i++) {
         var name = concepts[i]['concept']
@@ -97,7 +97,7 @@ function empty_concepts() {
 }
 
 function loadHome(arr) {
-    $("#images").hide()
+    $("#img_div").hide()
     $("#btns").show()
     console.log(arr)
     $("#verb_btns").empty()
@@ -120,14 +120,13 @@ function loadHome(arr) {
         var link = id + '_' + name;
         var btn = $("<button class='btn homeBtn'>"+ capitalFirstLetter(name) + "</button>")
         $(btn).attr('id', id)
+        $(btn).data('name', name)
         $(btn).attr('href', '#'+link)
         $(btn).click(function(){
             setActive(this.id)
-            // $("#btns").empty()
-            // $("#btns").addClass('invisible')
             $("#btns").hide()
-            // $("#bar").css('display', 'block')
             empty_concepts()
+            window.location.href = $(this).attr('href')//'#' + $(this).attr('id') + '_' + $(this).data('name')
         })
         var btndiv = $("<div class='row'>")
         $(btndiv).append(btn)
@@ -242,8 +241,10 @@ function capitalFirstLetter(name) {
 // }
 
 function display_symbols(id) {
-    $("#images").show()
+    $("#img_div").show()
     $("#btns").hide()
+    $("#images").empty()
+    var total = 0
     var symbol_list = all_data[id]["symbols"]
     for (i = 0; i < symbol_list.length;) {
         var counter = 0;
