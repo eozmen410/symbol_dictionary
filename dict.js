@@ -8,6 +8,9 @@ var concepts = [];
 var events = ['winter', 'summer', 'spring', 'fall','christmas', 'new years', 'halloween', 'easter','4th of july','valentines day','hanukkah', 'chinese new years','super bowl', 'day of the dead','st patricks day', 'ramadan','mother\'s day', 'father\'s day','thanksgiving','cinco de mayo']
 $(document).ready(function() {
     console.log("document ready, all_data:");
+    $("#search_in").css('visibility', 'visible')
+    $("#search_btn").css('visibility', 'visible')
+
     console.log(all_data);
     console.log(concepts)
     loadHome(Object.keys(all_data))
@@ -30,6 +33,8 @@ $(document).ready(function() {
     // display_symbols(active_type)
 
     $("#header").click(function(){
+        $("#search_in").css('visibility', 'visible')
+        $("#search_btn").css('visibility', 'visible')
         console.log('clicked on home')
         // $("#btns").removeClass('invisible')
         $("#btns").hide()
@@ -55,8 +60,31 @@ $(document).ready(function() {
         search(input)
     })
 
+    $("#extra_1").click(function(){
+        changeArrow(1)
+    });
+
+    $("#extra_2").click(function(){
+        changeArrow(2)
+    });
+
+    $("#extra_3").click(function(){
+        changeArrow(3)
+    });
     //add hash val load images
 });
+
+function changeArrow(i){
+        if ($("#extra"+i).hasClass('glyphicon-triangle-right')) {
+            $("#extra" + i).removeClass('glyphicon-triangle-right')
+            $("#extra"+ i).addClass('glyphicon-triangle-bottom')
+        }  else {
+            $("#extra"+i).removeClass('glyphicon-triangle-bottom')
+            $("#extra"+i).addClass('glyphicon-triangle-right')
+        }   
+    // $("#extra").toggleClass('glyphicon-arrow-right').toggleClass('glyphicon-arrow-left');
+
+}
 
 
 function search(word) {
@@ -122,7 +150,9 @@ function loadHome(arr) {
         $(btn).attr('id', id)
         $(btn).data('name', name)
         $(btn).attr('href', '#'+link)
-        $(btn).click(function(){
+        $(btn).dblclick(function(){
+             $("#search_in").css('visibility', 'hidden')
+             $("#search_btn").css('visibility', 'hidden')
             setActive(this.id)
             $("#btns").hide()
             empty_concepts()
@@ -165,6 +195,8 @@ function addConcept(id, name, partOfSpeech) {
         // $("#btns").addClass('invisible')
         // $("#search_btns").empty()
         empty_concepts()
+        $("#search_in").css('visibility', 'hidden')
+        $("#search_btn").css('visibility', 'hidden')
         setActive(this.id)
     })
     var pos = '#'+ partOfSpeech + 's';
