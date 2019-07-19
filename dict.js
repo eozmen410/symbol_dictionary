@@ -74,7 +74,14 @@ $(document).ready(function() {
         changeArrow(3)
     });
     //add hash val load images
+
+     $( "#search_in" ).autocomplete({
+      source: availableTags,
+    });
 });
+
+
+ var availableTags = [];
 
 function changeArrow(i){
         if ($("#extra"+i).hasClass('glyphicon-triangle-right')) {
@@ -94,7 +101,7 @@ function search(word) {
     var matching = []
     for (var i=0; i<concepts.length;i++) {
         var name = concepts[i]['concept']
-        if(name.includes(word)){
+        if((name.toLowerCase()).includes(word.toLowerCase())){
             console.log(name)
             // matching.push(concepts[i])
             matching.push(concepts[i]['id'])
@@ -112,6 +119,7 @@ function load_concepts_array() {
     for (var key in all_data) {
         var name = all_data[key]['concept_name'];
         concepts.push({'concept': name, 'id':key})
+        availableTags.push(name)
     }
 }
 
@@ -145,10 +153,12 @@ function loadHome(arr) {
         var id = arr[i];
         var key = arr[i]
         var name = all_data[key]['concept_name'];
+        var count = all_data[key]['symbols'].length
+
         // console.log(name)
         var pos = all_data[key]['partOfSpeech'];
         var link = id + '_' + name;
-        var btn = $("<button class='btn homeBtn'>"+ capitalFirstLetter(name) + "</button>")
+        var btn = $("<button class='btn homeBtn'>"+ capitalFirstLetter(name) + " ("+count +")"  +"</button>")
         $(btn).attr('id', id)
         $(btn).data('name', name)
         $(btn).attr('href', '#'+link)
@@ -176,9 +186,10 @@ function loadNavBar() {
     Object.keys(all_data).forEach(function(key, index) {
         var id = key;
         var name = all_data[key]['concept_name'];
+        var count = all_data[key]['symbols'].length
         console.log(name)
         var pos = all_data[key]['partOfSpeech'];
-        addConcept(id, name, pos);
+        addConcept(id, name, pos, count);
     })
     $('#verbDropdown').html("Verbs (" + verbCount + ")");
     $('#nounDropdown').html("Nouns (" + nounCount + ")");
@@ -186,10 +197,10 @@ function loadNavBar() {
     // $('#allDropdown').html("All (" + allCount + ")");
 }
 
-function addConcept(id, name, partOfSpeech) {
+function addConcept(id, name, partOfSpeech, count) {
     var link = id + '_' + name;
     console.log("adding dropdown concept: " + name);
-    var conceptOption = $("<a class='dropdown-item text-light' href='#"+link+"'>"+capitalFirstLetter(name)+"</a>");
+    var conceptOption = $("<a class='dropdown-item text-light' href='#"+link+"'>"+capitalFirstLetter(name)+ " ("+count +")" +"</a>");
     $(conceptOption).attr('id',  id);
     $(conceptOption).click(function() {
         console.log(this.id);
