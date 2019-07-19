@@ -343,8 +343,14 @@ outline: none!important;
 			.gridrow {
 				width:100%;
 			}
+			#bookmark {
+				color: #EDB103;
+				margin-top:-15px;
+				font-size: 22px;
+				vertical-align: top;
+			}
 	</style>
-	<script type="text/javascript" src="./all_data.js"></script>
+	<script type="text/javascript" src="./modified_all_data.js"></script>
 	<script type="text/javascript" src="./dict.js">	</script>
 
 </head>
@@ -352,7 +358,7 @@ outline: none!important;
 	<div class="container-fluid"> 
 		<div id="menu" > 
 		<div class="row" id="mainheader"> 
-			<div class= 'col-xs-2' style="display: inline-block; vertical-align: middle;" id="header"><span class="fa fa-file-image"></span> Symbol Dictionary </div>
+			<div class= 'col-xs-2' style="display: inline-block; vertical-align: middle;" id="header"><span id='bookmark' class="	glyphicon glyphicon-bookmark"></span> Symbol Dictionary </div>
 			<div class='col-xs-3' style="display: inline-block; vertical-align: middle;"> <input class="form-control mr-sm-2 search-form"  placeholder="Search concepts" aria-label="Search" id="search_in"> </div>
 		     <button style="display: inline-block; vertical-align: middle;" type="submit" id= "search_btn"><span class='glyphicon glyphicon-search'></span></button> 
 		</div>
