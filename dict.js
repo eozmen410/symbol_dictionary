@@ -134,7 +134,7 @@ function empty_concepts() {
     // $("#events_btns").append('<div align="center" class="col-header">Events</div><br>')
 }
 
-function loadHome(arr) {
+function loadHome_original(arr) {
     $("#img_div").hide()
     $("#btns").show()
     console.log(arr)
@@ -146,7 +146,11 @@ function loadHome(arr) {
     $("#adjective_btns").append('<div align="center" class="col-header">Adjectives</div><br>')
     $("#events_btns").empty()
     $("#events_btns").append('<div align="center" class="col-header">Events</div><br>')
-    
+    var verb_arr = new Array()
+    var noun_arr=[]
+    var adjective_arr=[]
+    var events_arr=[]
+
 
     // $("#btns").empty()
     for (var i in arr) {
@@ -172,13 +176,223 @@ function loadHome(arr) {
         })
         var btndiv = $("<div class='row'>")
         $(btndiv).append(btn)
-        var pos = '#'+ pos + '_btns';
-        if (events.includes(name.toLowerCase())){
-            pos = "#events_btns"
+        // var pos = '#'+ pos + '_btns';
+        // if (events.includes(name.toLowerCase())){
+        //     pos = "#events_btns"
+        // }
+
+        if(pos == 'verb'){
+            verb_arr.push(btn)
+            console.log("HEYO!")
+
+
         }
-        $(pos).append(btndiv);
+        else if(pos == 'adjective'){
+            adjective_arr.push(btn)
+
+        }
+        else if(pos == 'noun'){
+            noun_arr.push(btn)
+
+        }
+        else if(pos == 'events'){
+            events_arr.push(btn)
+
+        }
+
     }
+
+        verb_arr.sort(function (a, b) {
+            var x = a.name.toLowerCase();
+            var y = b.name.toLowerCase();
+                if (x < y) {return -1;}
+                if (x > y) {return 1;}
+                    return 0;
+         })
+        noun_arr.sort(function (a, b) {
+        return a.name - b.name
+         })
+        adjective_arr.sort(function (a, b) {
+        return a.name - b.name
+         })
+        events_arr.sort(function (a, b) {
+        return a.name - b.name
+         })
+
+
+        for(var i =0; i< verb_arr.length; i++){
+        console.log("HMMMMMM")
+
+            var btn = (verb_arr[i])
+            var btndiv = $("<div class='row'>")
+            $(btndiv).append(btn)
+            $("#verb_btns").append(btndiv)
+        }
+
+
+        //$(pos).append(btndiv); // make this an array that appending to
+        
+
+        //then, sort each array
+        // traverse each array and append
+    
 }
+
+
+function loadHome(arr) {
+    $("#img_div").hide()
+    $("#btns").show()
+    console.log(arr)
+    $("#verb_btns").empty()
+    $("#verb_btns").append('<div align="center" class="col-header">Verbs</div><br>')
+    $("#noun_btns").empty()
+    $("#noun_btns").append('<div align="center" class="col-header">Nouns</div><br>')
+    $("#adjective_btns").empty()
+    $("#adjective_btns").append('<div align="center" class="col-header">Adjectives</div><br>')
+    $("#events_btns").empty()
+    $("#events_btns").append('<div align="center" class="col-header">Events</div><br>')
+    var verb_arr = new Array()
+    var noun_arr=[]
+    var adjective_arr=[]
+    var events_arr=[]
+
+    for (var i in arr) {
+        var id = arr[i];
+        var key = arr[i]
+        var name = all_data[key]['concept_name'];
+        var count = all_data[key]['symbols'].length
+        var pos = all_data[key]['partOfSpeech'];
+        var link = id + '_' + name;
+        var btn = {id:id, name:name, href:'#'+link, count: count, key: key};
+      
+        if(events.includes(name.toLowerCase())){
+            events_arr.push(btn)
+
+        }
+        else if(pos == 'verb'){
+            verb_arr.push(btn)
+        }
+        else if(pos == 'adjective'){
+            adjective_arr.push(btn)
+
+        }
+        else if(pos == 'noun'){
+            noun_arr.push(btn)
+
+        }
+       
+
+    }
+
+        // verb_arr.sort(function (a, b) {
+        //     console.log(a.name)
+        //     var x = a.name.toLowerCase();
+        //     var y = b.name.toLowerCase();
+        //         if (x < y) {return -1;}
+        //         if (x > y) {return 1;}
+        //             return 0;
+        //  })
+        verb_arr.sort(function (a, b) {
+
+            return -(a.count - b.count)
+
+             })
+        noun_arr.sort(function (a, b) {
+            return -(a.count - b.count)
+        // console.log(a.name)
+        //     var x = a.name.toLowerCase();
+        //     var y = b.name.toLowerCase();
+        //         if (x < y) {return -1;}
+        //         if (x > y) {return 1;}
+        //             return 0;
+         })
+        adjective_arr.sort(function (a, b) {
+            return -(a.count - b.count)
+        // console.log(a.name)
+        //     var x = a.name.toLowerCase();
+        //     var y = b.name.toLowerCase();
+        //         if (x < y) {return -1;}
+        //         if (x > y) {return 1;}
+        //             return 0;
+         })
+        events_arr.sort(function (a, b) {
+            return -(a.count - b.count)
+        // console.log(a.name)
+        //     var x = a.name.toLowerCase();
+        //     var y = b.name.toLowerCase();
+        //         if (x < y) {return -1;}
+        //         if (x > y) {return 1;}
+        //             return 0;
+         })
+
+        for(var i =0; i< verb_arr.length; i++){
+        
+        var info_btn = (verb_arr[i])
+            console.log(btn.name)
+            var btndiv = prepButton(info_btn)
+            $("#verb_btns").append(btndiv)
+        }
+
+        for(var i =0; i< noun_arr.length; i++){
+        
+        var info_btn = (noun_arr[i])
+            console.log(btn.name)
+            var btndiv = prepButton(info_btn)
+            $("#noun_btns").append(btndiv)
+        }
+
+        for(var i =0; i< adjective_arr.length; i++){
+        
+        var info_btn = (adjective_arr[i])
+            console.log(btn.name)
+            var btndiv = prepButton(info_btn)
+            $("#adjective_btns").append(btndiv)
+        }
+
+        for(var i =0; i< events_arr.length; i++){
+        
+            var info_btn = (events_arr[i])
+            console.log(btn.name)
+            var btndiv = prepButton(info_btn)
+            $("#events_btns").append(btndiv)
+        }
+
+
+
+
+       
+       
+
+
+
+
+}
+
+function prepButton(info_btn ){
+    var btn = $("<button class='btn homeBtn'>"+ capitalFirstLetter(info_btn.name) + " ("+info_btn.count +")"  +"</button>"  )
+    // " ("+info_btn.count +")"  +"</button>")
+            $(btn).attr('id', info_btn.id)
+             $(btn).data('name', info_btn.name)
+            $(btn).attr('href', info_btn.href)
+            // $(btn).css('background-color', "rgb(237, 177, 3,"+ (info_btn.count / 100.0)+")" )
+            $(btn).css('background-color', "rgb(255, 188, 3,"+ (info_btn.count / 100.0)+")" )
+            // rgb(255, 188, 3)
+             $(btn).click(function(){
+             $("#search_in").css('visibility', 'hidden')
+             $("#search_btn").css('visibility', 'hidden')
+            setActive(this.id)
+            $("#btns").hide()
+            empty_concepts()
+            window.location.href = $(this).attr('href')//'#' + $(this).attr('id') + '_' + $(this).data('name')
+             })
+            var btndiv = $("<div class='row'>")
+            $(btndiv).append(btn)
+
+    return btndiv
+
+
+}
+
 
 
 function loadNavBar() {

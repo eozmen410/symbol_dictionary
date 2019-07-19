@@ -10,13 +10,16 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<!-- icon -->
+	<!-- <link rel=”stylesheet” href=”https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">  -->
+	<link rel=”stylesheet” href=”https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:bold,black,medium, bolditalic&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -30,15 +33,18 @@
 			/*background-color: white;*/
 			/*padding: 35px;*/
 			/*font-size: 30px;*/
-			font-weight: bold;
+			/*font-weight: bold;*/
 			text-align: left;
 			color: rgba(0,0,0,.54);
+			/*color:black;*/
 			font-size:21.3px;
-			font-family: 'Roboto', sans-serif;
+			font-family: 'Roboto', medium, sans-serif;
 			cursor:pointer;
 			padding-left:40px!important;
 			padding-top:10px!important;
 			padding-bottom:10px;
+
+			/*padding-right:;*/
 
 			/*font-family: "Product Sans",Arial,Helvetica,sans-serif;*/
 			/*font-family: "Roboto","Helvetica Neue",sans-serif;*/
@@ -126,7 +132,7 @@ outline: none!important;
 				border: none!important;
 		}
 		.homeBtn {
-			font-weight: bold;
+			/*font-weight: medium;*/
 			font-size: 13px;
 			padding: 15px;
 			width: 85%;
@@ -136,7 +142,11 @@ outline: none!important;
 			background-color: white;
 			border: 1px solid rgb(218, 220, 224);
 			border-radius:5px;
-			color:rgba(0,0,0,.54)!important;
+			font-family: 'Roboto', medium, sans-serif;
+			/*color:rgba(0,0,0,.54)!important;*/
+			border:2px solid #fbbc04!important;
+			/*color:#fbbc04!important;*/
+			color:black;
 		}
 
 		.homeBtn:focus{
@@ -153,6 +163,7 @@ outline: none!important;
 			text-align: left;
 			padding-top:30px;
 			padding-left: 22.500px;
+			color:#5f6368;
 			/*margin-left: auto;
 			margin-right: auto;*/
 
@@ -166,7 +177,7 @@ outline: none!important;
 			cursor: pointer;
 		}
 		.search-form {
-			width: 250px;
+			/*width: 250px;*/
 			background-color:#f3f3f3;
 			border:0px solid #ccc;
 		}
@@ -174,6 +185,7 @@ outline: none!important;
 			outline:none;
 			box-shadow: none;
 			border:1px solid #f3f3f3;
+
 		}
 
 		.glyphicon {
@@ -183,7 +195,9 @@ outline: none!important;
 		#mainheader{
 			border-bottom:1px solid rgb(218, 220, 224);
 			/*background-color: rgb(254, 246, 224);*/
-			background-color:#EDB103!important;
+			/*background-color:#EDB103!important;*/
+			background-color:white;
+
 
 			/*position: fixed;*/
 			/*z-index: 9999;*/
@@ -194,6 +208,7 @@ outline: none!important;
    				}
 		#search_btn{
 			color:rgba(0,0,0,.54);
+			/*color:black;*/
 			background-color: transparent!important; 
       		border-radius: 50px 50px  50px 50px !important;
       		border:none!important;
@@ -337,11 +352,12 @@ outline: none!important;
 	<div class="container-fluid"> 
 		<div id="menu" > 
 		<div class="row" id="mainheader"> 
-			<div class= 'col-xs-2' style="display: inline-block; vertical-align: middle;" id="header"> Symbol Dictionary </div>
-			<div style="display: inline-block; vertical-align: middle;"> <input class="form-control mr-sm-2 search-form"  placeholder="Search concepts" aria-label="Search" id="search_in"> </div>
+			<div class= 'col-xs-2' style="display: inline-block; vertical-align: middle;" id="header"><span class="fa fa-file-image"></span> Symbol Dictionary </div>
+			<div class='col-xs-3' style="display: inline-block; vertical-align: middle;"> <input class="form-control mr-sm-2 search-form"  placeholder="Search concepts" aria-label="Search" id="search_in"> </div>
 		     <button style="display: inline-block; vertical-align: middle;" type="submit" id= "search_btn"><span class='glyphicon glyphicon-search'></span></button> 
 		</div>
 		</div>
+
 
 		<div class='row' >
 		<div class = 'col-xs-2'>
@@ -406,9 +422,6 @@ outline: none!important;
 		</nav>
 	</div>
 
-
-		
-		<br>
 		<div class='col-xs-10'>
 		<div id="btns" class="row">
 			<div id="verb_btns" class="col-md-3"><div align="center" class="col-header">Verbs</div><br></div>
