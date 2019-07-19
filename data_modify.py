@@ -18,18 +18,16 @@ def clean_data():
             for x in dict_json:
                 # print dict_json[x]
                 dict_json[x]['id'] = x #add id variable
+                new_symbols = []
                 for symbol in dict_json[x]['symbols']:
-                    if symbol['deleted'] == "True":
-                        dict_json[x]['symbols'].remove(symbol)
-                        print 'removing!'
+                    if symbol['deleted'] == "False":
+                        new_symbols.append(symbol)
+                dict_json[x]['symbols'] = new_symbols
             new_js_file = './modified_all_data.js'
             with open(new_js_file, 'w') as outfile:
                 outfile.write("var all_data =")
                 json.dump(dict_json, outfile)
             print 'success!'
-
-                        
-
 
 if __name__ == "__main__":
     clean_data()
